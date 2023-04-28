@@ -1,0 +1,10 @@
+{%extends "base.html"%}
+{% block title %}Juegos{% endblock %}
+
+ {%block contenido%}
+<form action="/listajuegos" method="POST">
+    <label for="nombre">*.·Buscador: </label>
+    <input type="text" name="nombre" />
+    <input type="submit" value="SUBMIT" />
+</form>
+{%endblock%}
