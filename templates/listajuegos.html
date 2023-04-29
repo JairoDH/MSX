@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}lista de juegos{% endblock %}
+{% block content %}
+
+    {%for info in lista -%}
+        <ul>
+            <li>{{info}}</li>
+        </ul>
+    
+    {%endfor-%}
+
+{% endblock %}
