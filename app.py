@@ -25,10 +25,19 @@ def juegos():
     else:
         return render_template("juegos.html")
 
+#funcion de vista POST (introducido anteriormente por el usuario), se extrae el valor de entrada nombre del formulario
+#y se realiza la búsqueda en la lista de la variable datos(variable donde esta el json.MSX)
+#cuyo nombre comience por el valor del campo nombre(.startswith()) y lo añade a la lista resultados
+#devuelve (return) la plantilla HTML(listajuegos) y pasa la lista resultados.
 
-@app.route('/listajuegos')
+@app.route('/listajuegos', methods =['POST'])
 def listajuegos():
-    return render_template("listajuegos.html")
+    nombre = request.form['nombre']
+    resultado = []
+    for juego in datos:
+        if juego['nombre'].startswith(nombre):
+            resultado.append(juego)
+    return render_template('listajuegos.html',resultado = resultado)
 
 
 app.run("0.0.0.0",5000,debug=True)
