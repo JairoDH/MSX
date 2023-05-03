@@ -7,8 +7,7 @@
       <tr>
         <th>Nombre</th>
         <th>Desarrollador</th>
-        <th>Año</th>
-        <th>Categoría</th>
+        <th>Detalles</th>
       </tr>
     </thead>
     <tbody>
@@ -16,8 +15,7 @@
         <tr>
           <td>{{ juego.nombre }}</td>
           <td>{{ juego.desarrollador }}</td>
-          <td>{{ juego.año }}</td>
-          <td>{{ juego.categoria }}</td>
+          <td><a href="/juego/{{juego['id']}}">Detalles</a></td>
         </tr>
       {% endfor %}
     </tbody>

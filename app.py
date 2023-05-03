@@ -39,8 +39,14 @@ def listajuegos():
             resultado.append(juego)
     else:
         return render_template("listajuegos.html",resultado = resultado)
-    
+#función para la búsqueda de detalles de cada juego, el identificador pasa como parametro de ruta y en un entero(int)
+#la funcion busca el id dentro del msx(datos) y renderiza la plantilla juego con el juego encontrado
 
-
-
-app.run("0.0.0.0",5000,debug=True)
+@app.route('/juego/<int:identificador>', methods =["GET"])
+def detallesjuegos(identificador):
+    for juego in datos:
+        if juego['id'] == identificador:
+            return render_template('juego.html', juego=juego)
+    abort(404)
+      
+app.run("0.0.0.0",5001,debug=True)
