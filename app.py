@@ -1,4 +1,4 @@
-from flask import Flask, render_template, abort, redirect, request
+from flask import Flask, render_template, abort, request
 import json
 
 app = Flask(__name__)	
@@ -12,23 +12,20 @@ with open ('MSX.json') as msx:
 def inicio():
     return render_template("inicio.html")
 
-#definición de función de vista (GET, cuando se accede a la página y POST, el usuario envía información por el formulario)
-#si el usuario introduce información se extrae el valor del campo entrada nombre y redirige a la página de resultados de búsqueda
-#usando la función render_template()(para redireccionar a la página) y url_for().
-#si la solicitud es GET, se ejecuta el else devolviendo el contenido HTML (/juegos.html)
+#juegos(): Esta función es la vista de la página "juegos". Si la solicitud es "GET", devuelve la plantilla HTML "juegos.html" y pasa la variable datos que contiene los datos de los juegos. 
+#Si la solicitud es "POST", extrae el valor del campo "nombre" del formulario y redirige a la página "listajuegos.html".
 
 @app.route('/juegos', methods = ["GET", "POST"])
 def juegos():
     if request.method == 'POST':
-        nombre = request.form.get["nombre"]
+        nombre = request.form.get("nombre")
         return render_template("listajuegos.html", nombre = nombre)
     else:
         return render_template("juegos.html", datos = datos)
 
-#funcion de vista POST (introducido anteriormente por el usuario), se extrae el valor de entrada nombre del formulario
-#y se realiza la búsqueda en la lista de la variable datos(variable donde esta el json.MSX)
-#cuyo nombre comience por el valor del campo nombre(.startswith()) y lo añade a la lista resultados
-#devuelve (return) la plantilla HTML(listajuegos) y pasa la lista resultados.
+#listajuegos(): Es la función que se encarga de procesar la solicitud POST del formulario de búsqueda. 
+#Extrae el valor del campo "nombre" del formulario, busca los juegos cuyo nombre comienza con el valor del campo "nombre"
+# y los añade a una lista resultado. Devuelve la plantilla HTML "listajuegos.html" y pasa la variable resultado.
 
 @app.route('/listajuegos', methods =["POST"])
 def listajuegos():
@@ -39,8 +36,9 @@ def listajuegos():
             resultado.append(juego)
     else:
         return render_template("listajuegos.html",resultado = resultado)
-#función para la búsqueda de detalles de cada juego, el identificador pasa como parametro de ruta y en un entero(int)
-#la funcion busca el id dentro del msx(datos) y renderiza la plantilla juego con el juego encontrado
+#detallesjuegos(): Es la función que se encarga de renderizar la plantilla HTML de la página de detalles de un juego. 
+#El identificador del juego se pasa como parámetro de ruta y se utiliza la función int() para convertirlo en un entero. 
+#La función busca el juego con ese identificador en la lista datos y devuelve la plantilla HTML "juego.html" y pasa la variable juego.
 
 @app.route('/juego/<int:identificador>', methods =["GET"])
 def detallesjuegos(identificador):
