@@ -1,12 +1,25 @@
 {% extends "base.html" %}
-{% block title %}lista de juegos{% endblock %}
+{% block title %}Lista de Juegos{% endblock %}
+
 {% block content %}
-
-    {%for info in lista -%}
-        <ul>
-            <li>{{info}}</li>
-        </ul>
-    
-    {%endfor-%}
-
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Desarrollador</th>
+        <th>Año</th>
+        <th>Categoría</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for juego in resultado %}
+        <tr>
+          <td>{{ juego.nombre }}</td>
+          <td>{{ juego.desarrollador }}</td>
+          <td>{{ juego.año }}</td>
+          <td>{{ juego.categoria }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 {% endblock %}

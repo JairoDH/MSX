@@ -1,11 +1,10 @@
 {% extends "base.html" %}
 {% block title %}Juegos{% endblock %}
+{% block content %}
 
-{%block contenido%}
- 
 <form action="/listajuegos" method="POST">
-    <label for="nombre">*.·Buscador: </label>
-    <input type="text" name="nombre" />
-    <input type="submit" value="SUBMIT" />
+    <label for="nombre">Búsca el juego MSX:</label>
+    <input type="text" name="nombre" value="{{nombre}}"/><br/>
+    <button type="submit">Buscar</button>
 </form>
 {%endblock%}
